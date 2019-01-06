@@ -1,0 +1,127 @@
+<!-- <nav class="navbar navbar-expand-sm bg-blue navbar-dark">
+  <a class="brand-logo center">
+      <i class="material-icons">photo_camera</i> <b>Photo gallery</b>
+    </a>
+  <ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link" routerLink="/gallery/{{userName}}">Gallery</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" routerLink="/adminPanel">Admin panel</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" (click)="this.userService.Logout()">Logout</a>
+    </li>
+  </ul>
+</nav> -->
+
+<app-navbar></app-navbar>
+
+<div class="container">
+    <div class="row">
+      <div class="card" style="width:350px;height: 650;">
+        <div class="container">
+          <img *ngIf="noavatar" class="circle responsive-img center" src="assets/img/noavatar.png" alt="Card image" height="250" width="250">
+          <img *ngIf="!noavatar" class="circle responsive-img center" src="{{'data:image/jpeg;base64,' + avatar}}" alt="Card image" height="250" width="250">
+        </div>
+        <div class="card-body">
+          <form #imageForm=ngForm (ngSubmit)="SetAvatar(Image)">
+            <input type="file" class="inputfile" #Avatar accept="image/*" data-toggle="modal" data-target="#myModal" (change)="fileChangeEvent($event)">
+            <div [hidden]="Avatar.value==''" id="myModal" class="modal fade" role="dialog">
+              <div  class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                  </div>
+                  <div class="modal-body">
+                      <image-cropper
+                      [imageChangedEvent]="imageChangedEvent"
+                      [maintainAspectRatio]="true"
+                      [aspectRatio]="1 / 1"
+                      format="png"
+                      (imageCropped)="imageCropped($event)"
+                      (imageLoaded)="imageLoaded()"
+                      (loadImageFailed)="loadImageFailed()"
+                  ></image-cropper>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" (click)="SetAvatar(Avatar)" data-dismiss="modal">Ok</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- ASDASDASDASD -->
+              
+            <!-- <a *ngIf="!Avatar.value==''" class="btn-floating btn-large cyan pulse" data-toggle="modal" data-target="#myModal"><i class="material-icons">add_a_photo</i></a>
+            <a *ngIf="Avatar.value==''"class="btn-floating btn-large cyan disabled"  (click)="SetAvatar()"><i class="material-icons">add_a_photo</i></a> -->
+            
+          </form>
+          <div class="row">
+            <a class="waves-effect waves-light btn-large offset-s6"><i class="material-icons right">cloud</i>Add photos</a>
+          </div>
+          <h4 class="card-title center">{{this.userFromRoute}}</h4>
+          <p class="card-text center">{{this.description}}</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- <div class="row"> -->
+      <div class="row">
+        <div *ngFor="let image of imageEntities"  class="row">
+          <!-- <div *ngFor="let image of imageEntities" > -->
+    
+            <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 1" href=""><img class="thumbnail img-responsive" src="{{'data:image/jpeg;base64,' + image.Data}}"></a></div>
+          <!-- </div> -->
+        </div>
+        <hr>
+        <a href="http://bootply.com/71401">Edit on Bootply</a>
+        <hr>
+      </div>
+    </div>
+    <div class="modal" id="myModal" role="dialog">
+      <div class="modal-dialog">
+      <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal">×</button>
+        <h3 class="modal-title"></h3>
+      </div>
+      <div class="modal-body">
+        <div id="modalCarousel" class="carousel">
+     
+              <div class="carousel-inner">
+               
+              </div>
+              
+              <a class="carousel-control left" href="#modaCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+              <a class="carousel-control right" href="#modalCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+              
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+       </div>
+      <!-- </div> -->
+    </div>
+</div>
+  
+
+<div class="container">
+    <div class="row">
+      <div class="col s8 offset-2">
+        <!-- <form #imageForm=ngForm (ngSubmit)="SetAvatar(Image)"> -->
+          <form #imageForm=ngForm (ngSubmit)="OnSubmit(Caption,Image)">
+          <div class="row">
+            <div class="input-field col s12">
+              <input type="text" #Caption ngModel name="Caption" id="Caption" required>
+              <label for="Caption">Caption</label>
+            </div>
+          </div>
+          <img [src]="imageUrl"  style="width:250px;height:200px">
+          <input type="file" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
+          <button type="submit" class="btn-large btn-submit" [disabled]="Image.value=='' || !imageForm.valid">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>

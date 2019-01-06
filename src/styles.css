@@ -1,0 +1,49 @@
+/* 
+div.sm-jumbotron{
+    margin: 0px;
+    padding: 2rem;
+    background-color: #ac212d;
+    color: #fff;
+}
+ 
+button.btn-submit{
+    background-color: #f85b68;
+    color: #fff;
+    width: 100%;
+}
+button.btn-submit:focus,button.btn-submit:hover{
+    background-color: #ad2530;
+}
+
+input.ng-invalid.ng-dirty{
+    border-bottom-color: #e91e63 !important;
+    box-shadow: 0 1px 0 0 #e91e63 !important;
+}
+
+div.error-message i{
+    vertical-align: middle !important;
+}
+
+.tabs{
+    height: 65px;
+}
+
+.tabs .tabs{
+    text-transform: none !important;
+    line-height: 65px;
+    height: 65px;
+}
+
+.tabs .tab a{
+    font-size: 25px;
+    color: whitesmoke !important;
+}
+
+body{
+    background-color: #f85b68;
+}
+
+.main-content{
+    padding-top:60px;
+    color: #444;
+} */

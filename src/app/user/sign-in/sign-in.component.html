@@ -1,0 +1,45 @@
+ <div *ngIf="isLoginError" class="red-text center error-message">
+  <i class="material-icons">error</i> Incorrect UserName or Password
+</div>
+<form #loginForm="ngForm" class="white" (ngSubmit)="OnSubmit(UserName.value,Password.value)">
+    <div class="container">
+      <div class="input-field col s12">
+        <i class="material-icons prefix">account_circle</i>
+        <input type="text" #UserName ngModel name="UserName" placeholder="UserName" required>
+      </div>
+    </div>
+    <div class="container">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">vpn_key</i>
+          <input type="password" #Password ngModel name="Password" placeholder="Password" required>
+        </div>
+      </div>
+      <div class="container">
+        <div class="input-field col s12">
+          <button [disabled]="!loginForm.valid" class="btn-large btn-submit" type="submit">Log In</button>
+        </div>
+      </div>
+  </form> 
+
+
+<!-- <div class="container">
+  <form class="text-center border border-light p-5">
+    <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
+    <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
+    <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
+  </form>
+</div> -->
+<!-- <div class="container">
+
+  <form action="/action_page.php">
+    <div class="form-group">
+      <label for="email">Login:</label>
+      <input type="email" class="form-control" id="email">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control" id="pwd">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div> -->

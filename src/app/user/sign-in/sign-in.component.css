@@ -1,0 +1,13 @@
+.container {
+    width: 900px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* .col {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 400% !important;
+} */

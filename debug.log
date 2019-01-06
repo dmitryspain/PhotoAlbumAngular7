@@ -1,0 +1,7 @@
+[1224/152503.883:ERROR:process_info.cc(359)] UncheckedAllocate
+[1224/152503.987:WARNING:minidump_to_upload_parameters.cc(66)] duplicate annotation name metrics_client_id, discarding value 41227de276694a56ad9d34482c5fe797
+[1224/170641.253:ERROR:process_info.cc(329)] VirtualQueryEx: Отказано в доступе. (0x5)
+[1230/163948.068:ERROR:process_info.cc(359)] UncheckedAllocate
+[1230/164508.255:ERROR:process_info.cc(359)] UncheckedAllocate
+[1230/164520.214:ERROR:process_info.cc(359)] UncheckedAllocate
+[1230/164746.588:ERROR:process_info.cc(359)] UncheckedAllocate
