@@ -6,16 +6,16 @@ import { Image } from '../shared/image.model';
 
 @Injectable()
 export class ImageService {
+  header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));
   readonly rootUrl = 'http://localhost:50796';
   imageEntities: Array<Image>;
   
   constructor(private userService: UserService, private http: HttpClient) { }
 
   getPhotos(): Array<Image>{
-    const header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));
 
     this.http
-      .get(this.rootUrl + '/api/GetPhotos', {headers: header})
+      .get(this.rootUrl + '/api/GetPhotos', {headers: this.header})
       .toPromise()
       .then((x: Array<Image>) => {
         this.imageEntities = x; 
@@ -36,8 +36,7 @@ export class ImageService {
     formData.append('ImageDescription', description);
     formData.append('UserName', name);
 
-    const header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));
-    return this.http.post(endPoint, formData, {headers: header});
+    return this.http.post(endPoint, formData, {headers: this.header});
   }
 
   setAvatar(fileToUpload: File)
@@ -48,8 +47,34 @@ export class ImageService {
     const formData: FormData = new FormData();
     formData.append('Image', fileToUpload, fileToUpload.name);
 
-    const header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));
-    return this.http.post(endPoint, formData, {headers: header});
+    return this.http.post(endPoint, formData, {headers: this.header});
   }
+
+  RemovePhoto(Id: number):any
+  {
+    debugger;
+    const header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));
+    const endPoint = 'http://localhost:50796/api/RemovePhoto/' + Id.toString();
+    return this.http.get(endPoint, {headers: header});
+  }
+
+
+  // getImage(ImageId) : Image{
+  //   // debugger;
+  //   const header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));
+  //   let rofl;
+  //   this.http
+  //     .get(this.rootUrl + '/api/GetPhoto/' + ImageId, {headers: header})
+  //     .toPromise()
+  //     .then((x: Image) => {
+  //       // debugger;
+  //       //this.users = x; 
+        
+  //       rofl = x;
+  //       })
+  //       return rofl;
+      
+  // }
+
 }
 

@@ -3,7 +3,7 @@ import { NgForm, FormControl } from '@angular/forms';
 import { User } from '../../shared/user.model';
 import { UserService } from '../../shared/user.service';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
-import { ErrorMessage } from 'ng-bootstrap-form-validation';
+import { NotificationService } from '@progress/kendo-angular-notification';
 
 @Component({
   selector: 'app-sign-up',
@@ -16,7 +16,7 @@ export class SignUpComponent implements OnInit {
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
 
   constructor(private userService: UserService,
-    private fb: FormBuilder) 
+    private fb: FormBuilder, private notificationService: NotificationService) 
   {
     this.createForm();
   }
@@ -73,7 +73,13 @@ export class SignUpComponent implements OnInit {
       if(data.Succeeded == true)
       {
         this.resetForm(form);
-        // this.toastr.success('User registration successful');
+        this.notificationService.show({
+          content: 'Your data has been saved. Time for tea!',
+          animation: { type: 'slide', duration: 400 },
+          position: { horizontal: 'center', vertical: 'bottom' },
+          type: { style: 'success', icon: true },
+          closable: true
+      });
       }
       // else this.toastr.error(data.Errors[0]);
     });

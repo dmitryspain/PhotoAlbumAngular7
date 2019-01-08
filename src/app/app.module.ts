@@ -51,7 +51,6 @@ import {
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    // ToastrModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     AlertsModule.forRoot(),
     MDBBootstrapModule.forRoot(),

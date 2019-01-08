@@ -13,7 +13,7 @@ export const appRoutes : Routes = [
     { path: 'home', component: HomeComponent, canActivate:[AuthGuard] },
     { path: 'forbidden', component: ForbiddenComponent, canActivate: [AuthGuard]},
     { path: 'gallery/:id', component: GalleryComponent, canActivate:[AuthGuard]},
-    { path: 'image/:id', component: ImageDetailComponent},
+    { path: 'gallery/image/:id', component: ImageDetailComponent},
     { path: 'adminPanel', component: AdminPanelComponent, canActivate: [AuthGuard] , data: { roles: ['Administrators'] }},
     { 
         path: 'signup', component: UserComponent,

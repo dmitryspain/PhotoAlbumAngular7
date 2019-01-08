@@ -64,58 +64,64 @@
           <p class="card-text center">{{this.description}}</p>
         </div>
       </div>
-    </div>
+      
     
-    <!-- <div class="row"> -->
-      <div class="row">
-        <div *ngFor="let image of imageEntities"  class="row">
-          <!-- <div *ngFor="let image of imageEntities" > -->
-    
-            <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 1" href=""><img class="thumbnail img-responsive" src="{{'data:image/jpeg;base64,' + image.Data}}"></a></div>
-          <!-- </div> -->
-        </div>
-        <hr>
-        <a href="http://bootply.com/71401">Edit on Bootply</a>
-        <hr>
-      </div>
-    </div>
-    <div class="modal" id="myModal" role="dialog">
-      <div class="modal-dialog">
-      <div class="modal-content">
-      <div class="modal-header">
-        <button class="close" type="button" data-dismiss="modal">×</button>
-        <h3 class="modal-title"></h3>
-      </div>
-      <div class="modal-body">
-        <div id="modalCarousel" class="carousel">
-     
-              <div class="carousel-inner">
-               
-              </div>
-              
-              <a class="carousel-control left" href="#modaCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
-              <a class="carousel-control right" href="#modalCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
-              
-            </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-       </div>
-      <!-- </div> -->
-    </div>
-</div>
-  
 
-<div class="container">
-    <div class="row">
-      <div class="col s8 offset-2">
-        <!-- <form #imageForm=ngForm (ngSubmit)="SetAvatar(Image)"> -->
-          <form #imageForm=ngForm (ngSubmit)="OnSubmit(Caption,Image)">
-          <div class="row">
-            <div class="input-field col s12">
-              <input type="text" #Caption ngModel name="Caption" id="Caption" required>
-              <label for="Caption">Caption</label>
+    <main class="grid">
+      <div *ngFor="let image of imageEntities; let i = index" >
+
+        <a [routerLink] ="['/gallery/image', image.Id]">
+          <img id="i" src="{{'data:image/jpeg;base64,' + image.Data}}" alt="Sample photo">
+        </a>
+      </div>
+    </main> 
+    
+  </div>
+
+
+      <!-- <div class="row"> 
+        <div *ngFor="let image of imageEntities"  class="row">
+            <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 1" href=""><img class="thumbnail img-responsive" src="{{'data:image/jpeg;base64,' + image.Data}}"></a></div>
+        </div>
+      </div>
+      <div class="modal" id="myModal" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button class="close" type="button" data-dismiss="modal">×</button>
+              <h3 class="modal-title"></h3>
+            </div>
+            <div class="modal-body">
+              <div id="modalCarousel" class="carousel">
+                
+                <div class="carousel-inner">
+                  
+                </div>
+                
+                <a class="carousel-control left" href="#modaCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                <a class="carousel-control right" href="#modalCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+                
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      </div> -->
+      
+      
+      <div class="container">
+        <div class="row">
+          <div class="col s8 offset-2">
+            <!-- <form #imageForm=ngForm (ngSubmit)="SetAvatar(Image)"> -->
+              <form #imageForm=ngForm (ngSubmit)="OnSubmit(Caption,Image)">
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input type="text" #Caption ngModel name="Caption" id="Caption" required>
+                    <label for="Caption">Caption</label>
             </div>
           </div>
           <img [src]="imageUrl"  style="width:250px;height:200px">
@@ -125,3 +131,23 @@
       </div>
     </div>
   </div>
+
+
+
+
+<!-- 
+  <div class="row"> 
+    <div class="column">
+      <img *ngFor="let image of imageEntities" src="{{'data:image/jpeg;base64,' + image.Data}}">
+    </div>
+    <div class="column">
+      <img *ngFor="let image of imageEntities" src="{{'data:image/jpeg;base64,' + image.Data}}">
+    </div> 
+    <div class="column">
+      <img *ngFor="let image of imageEntities" src="{{'data:image/jpeg;base64,' + image.Data}}">
+    </div>
+    <div class="column">
+      <img *ngFor="let image of imageEntities" src="{{'data:image/jpeg;base64,' + image.Data}}">
+    </div>
+  </div>
+ -->

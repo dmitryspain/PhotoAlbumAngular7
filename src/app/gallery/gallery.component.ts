@@ -118,45 +118,13 @@ export class GalleryComponent implements OnInit {
       this.description = x.Description;
       this.avatar = x.Avatar;
       this.noavatar = this.avatar == null;
+      //this.imageEntities.forEach(x=>x.)
       //this.imageEntities = x.json() as ;
       console.log('users = ' + this.users)
       })
-      // .catch((x: Response) => {
-      //   console.log(x.status);
-      // });
-    // this.http
-    //   .get(this.rootUrl + '/api/GetAllPhotos/' + this.userFromRoute, {headers: header})
-    //   .toPromise()
-    //   .then((x: Array<Image>) => {
-    //     this.imageEntities = x; 
-    //   })
-    //   .catch((x: Response) => {
-    //     console.log(x.status);
-    //   });
+      
   }
 
-  // getAllUsers() : Observable<any>
-  // {
-  //   const header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));
-
-  //   // this.http
-  //   // .get(this.rootUrl + '/api/GetAllUsers', {headers: header})
-  //   // .toPromise()
-  //   // .then((x: Array<UserData>) => {
-  //   //   debugger;
-  //   //   // this.users = x;
-  //   //   this.users = x
-  //   //   console.log('users = ' + this.users)
-  //   // })
-  //   // .catch((x: Response) => {
-  //   //   console.log(x.status);
-  //   // });
-  //   // console.log('users = ' + this.users)
-  //     // return this.http.get("/api/number/").map((json: Object): number => {
-  //     // return (json["number"] as number);
-       
-  //     // });
-  // }
 
 
 
