@@ -3,7 +3,6 @@ import { NgForm, FormControl } from '@angular/forms';
 import { User } from '../../shared/user.model';
 import { UserService } from '../../shared/user.service';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
-import { NotificationService } from '@progress/kendo-angular-notification';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,9 +13,9 @@ export class SignUpComponent implements OnInit {
   user : User;
   angForm: FormGroup;
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
-
+  isSucceded = false;
   constructor(private userService: UserService,
-    private fb: FormBuilder, private notificationService: NotificationService) 
+    private fb: FormBuilder) 
   {
     this.createForm();
   }
@@ -62,26 +61,18 @@ export class SignUpComponent implements OnInit {
 
   OnSubmit(form : FormGroup)
   {
-    debugger;
     this.user.Email = this.angForm.get('email').value;
     this.user.UserName = this.angForm.get('name').value;
     this.user.Password = this.angForm.get('password').value;
     
-    let rofl = this.angForm.status;
     this.userService.registerUser(this.user)
     .subscribe((data:any)=>{
       if(data.Succeeded == true)
       {
+        debugger;
+        this.isSucceded = true;
         this.resetForm(form);
-        this.notificationService.show({
-          content: 'Your data has been saved. Time for tea!',
-          animation: { type: 'slide', duration: 400 },
-          position: { horizontal: 'center', vertical: 'bottom' },
-          type: { style: 'success', icon: true },
-          closable: true
-      });
       }
-      // else this.toastr.error(data.Errors[0]);
     });
   }
 

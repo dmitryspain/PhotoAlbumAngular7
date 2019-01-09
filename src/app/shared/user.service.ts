@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { User } from './user.model';
 import { debug } from 'util';
 import { Router } from '@angular/router';
+import { UserData } from '../admin-panel/UserData.model';
 
 
 @Injectable()
@@ -33,25 +34,42 @@ export class UserService {
     return this.http.post(this.rootUrl + '/Token', data, {headers: reqHeader});
   }
 
-  getAllUsers() :Array<User>
-  {
-    let data: Array<User>;
+  getAllUsers(){
+  
+    // let data: Array<User>;
     const header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));
-    this.http
-    .get(this.rootUrl + '/api/GetAllUsers', {headers: header})
-    .toPromise()
-    .then((x: Array<User>) => {
-      debugger;
-      data = x; 
-      console.log('users = ' + data)
+    // var reqHeader = new HttpHeaders({ 'No-Auth': 'True' });
+  return this.http.get(this.rootUrl + '/api/GetAllUsers', { headers: header });
+    // this.http
+    // .get(this.rootUrl + '/api/GetAllUsers', {headers: header})
+    // .toPromise()
+    // .then((x: Array<User>) => {
+    //   debugger;
+    //   data = x; 
+    //   console.log('users = ' + data)
 
-      })
-      .catch((x: Response) => {
-        console.log(x.status);
-      });
+    //   })
+    //   .catch((x: Response) => {
+    //     console.log(x.status);
+    //   });
 
-      return data;
+    //   return data;
+ 
   }
+
+  private extractUsers(response: Response): UserData[]{
+    let res = response.json();
+    debugger;
+    let users: UserData[] = [];
+    for (let i = 0; i < res.length; i++) {
+      users.push()
+      let asd = res[i];
+      users.push(new UserData());
+    }
+    return users;
+  }
+
+
 
 
   getAllPhotos() :any

@@ -17,6 +17,12 @@
 
 <app-navbar></app-navbar>
 
+<p *ngIf="isPhotoRemovedRecently">
+  <ngb-alert [dismissible]="false" type="success">
+    <strong>Success!</strong> Your image was removed successfully
+  </ngb-alert>
+</p>
+
 <div class="container">
     <div class="row">
       <div class="card" style="width:350px;height: 650;">
@@ -51,10 +57,7 @@
                 </div>
               </div>
             </div>
-            <!-- ASDASDASDASD -->
-              
-            <!-- <a *ngIf="!Avatar.value==''" class="btn-floating btn-large cyan pulse" data-toggle="modal" data-target="#myModal"><i class="material-icons">add_a_photo</i></a>
-            <a *ngIf="Avatar.value==''"class="btn-floating btn-large cyan disabled"  (click)="SetAvatar()"><i class="material-icons">add_a_photo</i></a> -->
+           
             
           </form>
           <div class="row">

@@ -3,6 +3,7 @@ import { UserService } from '../shared/user.service';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Image } from '../shared/image.model';
+import { ClientProfile } from '../admin-panel/ClientProfile.model';
 
 @Injectable()
 export class ImageService {
@@ -10,21 +11,23 @@ export class ImageService {
   readonly rootUrl = 'http://localhost:50796';
   imageEntities: Array<Image>;
   
-  constructor(private userService: UserService, private http: HttpClient) { }
+  constructor(private userService: UserService, private http: HttpClient) { 
+    
+  }
 
-  getPhotos(): Array<Image>{
+  isUserHavePhoto(userName: string, photoId: number) : Promise<boolean>
+  {
+    const header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));
 
-    this.http
-      .get(this.rootUrl + '/api/GetPhotos', {headers: this.header})
-      .toPromise()
-      .then((x: Array<Image>) => {
-        this.imageEntities = x; 
-      })
-      .catch((x: Response) => {
-        console.log(x.status);
-      });
+    let endPoint = this.rootUrl + '/api/IsUserHavePhoto/' + userName + '/' + photoId;
+    var data = this.http
+    .get(endPoint, {headers: header})
+    .toPromise()
+    .then((x: Promise<boolean>) => {
+      return x;
+    })
 
-    return this.imageEntities;
+    return data
   }
 
   postFile(description: string, fileToUpload: File)
@@ -57,24 +60,6 @@ export class ImageService {
     const endPoint = 'http://localhost:50796/api/RemovePhoto/' + Id.toString();
     return this.http.get(endPoint, {headers: header});
   }
-
-
-  // getImage(ImageId) : Image{
-  //   // debugger;
-  //   const header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));
-  //   let rofl;
-  //   this.http
-  //     .get(this.rootUrl + '/api/GetPhoto/' + ImageId, {headers: header})
-  //     .toPromise()
-  //     .then((x: Image) => {
-  //       // debugger;
-  //       //this.users = x; 
-        
-  //       rofl = x;
-  //       })
-  //       return rofl;
-      
-  // }
 
 }
 

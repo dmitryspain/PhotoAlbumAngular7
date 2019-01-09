@@ -33,6 +33,8 @@ export class GalleryComponent implements OnInit {
   noavatar = true;
   imageChangedEvent: any = '';
   croppedImage: Blob;
+  isPhotoRemovedRecently = false;
+  canBeDeleted=false;
 
   fileChangeEvent(event: any): void {
       this.imageChangedEvent = event;
@@ -50,9 +52,24 @@ export class GalleryComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.route.queryParams
+      .subscribe(params => {
+        this.isPhotoRemovedRecently = params.isPhotoRemovedRecently;
+      });
+
+    
     this.getPhotos();
-    //this.getAllUsers();
   }
+
+  // canDelete(Id: number): boolean
+  // {
+  //   //debugger;
+
+  //   var user = localStorage.getItem('userName');
+  //   debugger;
+  //   return this.imageService.isUserHavePhoto(user, Id); 
+  //   //this.imageEntities.find(x=>x.Id == Id) != null;
+  // }
 
   handleFileInput(file: FileList)
   {
@@ -112,16 +129,12 @@ export class GalleryComponent implements OnInit {
     .get(this.rootUrl + '/api/GetProfileData/' + this.userFromRoute, {headers: header})
     .toPromise()
     .then((x: ClientProfile) => {
-      //debugger;
-      //this.users = x; 
       this.imageEntities = x.Photos;
       this.description = x.Description;
       this.avatar = x.Avatar;
       this.noavatar = this.avatar == null;
-      //this.imageEntities.forEach(x=>x.)
-      //this.imageEntities = x.json() as ;
       console.log('users = ' + this.users)
-      })
+    })
       
   }
 

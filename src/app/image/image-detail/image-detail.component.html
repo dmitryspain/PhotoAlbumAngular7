@@ -6,9 +6,8 @@
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium est delenivero.
             </p>
         </div> -->
-
         <h3>Description: {{image.Description}} </h3>
         <h3>Uploaded Date : {{image.UploadedDate}}</h3>
-        <button (click)="this.removePhoto(image.Id)"  class="waves-effect waves-light btn-large"><i class="material-icons left">cloud</i>Delete photo</button>
+        <button *ngIf="canBeDeleted" (click)="this.removePhoto(image.Id)"  class="waves-effect waves-light btn-large"><i class="material-icons left">cloud</i>Delete photo</button>
       </div>
 </div>
