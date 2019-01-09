@@ -14,43 +14,27 @@ export class ImageDetailComponent implements OnInit {
   readonly rootUrl = 'http://localhost:50796';
   image: Image;
   canBeDeleted = false;
-  // canDelete = false;
   userFromRoute: string;
   constructor(private imageService: ImageService, private route: ActivatedRoute,
     private http: HttpClient, private router: Router) { }
 
 
   ngOnInit() {
-    this.getImage();
+    let idFromRoute;
+    this.route.params.subscribe(params => {
+      idFromRoute = +params['id']; // (+) converts string 'id' to a number
+   });
+
+    this.getImage(idFromRoute);
     // this.route.queryParams
     // .subscribe(params => {
     //   // debugger;
     //   // this.userFromRoute = params.user;
     // });
-    this.canBeDeleted = this.canDelete(this.image.Id);
-    console.log('can = ' + this.canBeDeleted);
-
   }
 
-  canDelete(Id: number) : boolean
-  {
-    debugger;
-
-    var user = localStorage.getItem('userName');
-    debugger;
-    return this.imageService.isUserHavePhoto(user, Id); 
-
-    //this.imageEntities.find(x=>x.Id == Id) != null;
-  }
-
-
-
-
-  removePhoto(Id: number){
-    debugger;
-    // this.imageService.RemovePhoto(Id);
+  async removePhoto(Id: number){
     // debugger;
-
     const header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));
     let userName = localStorage.getItem('userName');
     return this.http
@@ -64,17 +48,17 @@ export class ImageDetailComponent implements OnInit {
     })
   }
 
-  getImage() {
+  getImage(Id: number) {
     const header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));
     
-    let idFromRoute;
+  //   let idFromRoute;
     
-    this.route.params.subscribe(params => {
-      idFromRoute = +params['id']; // (+) converts string 'id' to a number
-   });
+  //   this.route.params.subscribe(params => {
+  //     idFromRoute = +params['id']; // (+) converts string 'id' to a number
+  //  });
 
    this.http
-    .get(this.rootUrl + '/api/GetPhoto/' + idFromRoute, {headers: header})
+    .get(this.rootUrl + '/api/GetPhoto/' + Id, {headers: header})
     .toPromise()
     .then((x: Image) => {
 
@@ -87,7 +71,5 @@ export class ImageDetailComponent implements OnInit {
           this.canBeDeleted = data;
         }) 
       })
-      
   }
-
 }
