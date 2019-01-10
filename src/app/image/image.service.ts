@@ -12,7 +12,7 @@ export class ImageService {
   imageEntities: Array<Image>;
   
   constructor(private userService: UserService, private http: HttpClient) { 
-    
+
   }
 
   isUserHavePhoto(userName: string, photoId: number) : Promise<boolean>
@@ -61,5 +61,13 @@ export class ImageService {
     return this.http.get(endPoint, {headers: header});
   }
 
+  likePhoto(photoId: number)
+  {
+    // debugger;
+    // const header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));
+    let userName = localStorage.getItem('userName');
+    const endPoint = 'http://localhost:50796/api/LikePhoto/' + photoId + '/' + userName;
+    return this.http.post(endPoint, {headers: this.header});
+  }
 }
 

@@ -13,12 +13,15 @@ import { GalleryComponent } from 'src/app/gallery/gallery.component';
 export class ImageDetailComponent implements OnInit {
   readonly rootUrl = 'http://localhost:50796';
   image: Image;
-  canBeDeleted = false;
+  canBeDeleted=false;
+  likes: string[];
   userFromRoute: string;
+  likesCount:number;
   constructor(private imageService: ImageService, private route: ActivatedRoute,
     private http: HttpClient, private router: Router) { }
 
 
+    
   ngOnInit() {
     let idFromRoute;
     this.route.params.subscribe(params => {
@@ -26,7 +29,7 @@ export class ImageDetailComponent implements OnInit {
    });
 
     this.getImage(idFromRoute);
-    // this.route.queryParams
+      // this.route.queryParams
     // .subscribe(params => {
     //   // debugger;
     //   // this.userFromRoute = params.user;
@@ -48,6 +51,13 @@ export class ImageDetailComponent implements OnInit {
     })
   }
 
+  likePhoto(){
+    this.imageService.likePhoto(this.image.Id).subscribe((data : Image)=>{
+      this.likesCount = data.Likes.length;
+    });
+    
+  }
+
   getImage(Id: number) {
     const header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));
     
@@ -66,6 +76,7 @@ export class ImageDetailComponent implements OnInit {
         this.router.navigate(['/forbidden']);
       else
         this.image = x;
+        this.likesCount = this.image.Likes.length;
         var user = localStorage.getItem('userName');
         this.imageService.isUserHavePhoto(user, this.image.Id).then(data=>{
           this.canBeDeleted = data;

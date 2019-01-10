@@ -129,6 +129,7 @@ export class GalleryComponent implements OnInit {
     .get(this.rootUrl + '/api/GetProfileData/' + this.userFromRoute, {headers: header})
     .toPromise()
     .then((x: ClientProfile) => {
+      debugger;
       this.imageEntities = x.Photos;
       this.description = x.Description;
       this.avatar = x.Avatar;
