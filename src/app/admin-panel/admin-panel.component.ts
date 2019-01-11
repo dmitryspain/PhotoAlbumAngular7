@@ -5,6 +5,11 @@ import { User } from '../shared/user.model';
 import { ClientProfile } from './ClientProfile.model';
 import { UserData } from './UserData.model';
 import { Http, Response } from "@angular/http";
+import { ViewChild, ElementRef, AfterViewInit} from '@angular/core';
+import { RoleService } from '../shared/role.service';
+import { Role } from '../shared/role.model';
+declare var $:any;
+
 @Component({
   selector: 'app-admin-panel',
   templateUrl: './admin-panel.component.html',
@@ -16,54 +21,75 @@ export class AdminPanelComponent implements OnInit {
   users: UserData[] = [];
   userNames: string[];
   userEmails: string[];
-  
+  possibleRoles: string[];
+  userRoles: string[];
+  currentUser: string;
   constructor(private userService: UserService,
-    private http: HttpClient) { }
+    private http: HttpClient, private roleService: RoleService) { }
 
   ngOnInit() {
-    //this.userName = localStorage.getItem('userName');
-    //this.userService.getAllUsers();
     this.getAllUsers();
   }
+
+  method(userName: string)
+  {
+    // debugger;
+    var allRoles: string[];
+    var possibleRoles: any;
+    var userRoles: string[] ;
+
+    userRoles = this.users.find(x=>x.UserName == userName).Roles;
+    // data.foreach(d=>users.push(d))
+    this.roleService.getAllRoles().toPromise().then((data: string[])=>{
+      //  debugger;
+      allRoles = data;
+      userRoles = this.users.find(x=>x.UserName == userName).Roles;
+
+      possibleRoles = allRoles.filter(function(obj) {
+        return !userRoles.some(function(obj2) {
+            return obj['Name'] == obj2['Name'];
+          });
+      });
+
+      this.possibleRoles = possibleRoles;
+      this.userRoles = userRoles;
+      this.currentUser = userName;
+    });
+
+  }
   
+  removeFromRole(userName: string, roleName: string)
+  {
+    debugger;
+    this.userService.deleteFromRole(userName, roleName).subscribe((data)=>{
+      console.log(data);
+    });
+  }
+
+  addToRole(userName: string, roleName: string)
+  {
+
+    this.userService.addToRole(userName, roleName).subscribe((data)=>{
+      console.log(data);
+      window.location.reload();
+    })
+  }
+
+
+
+
+
+
+
   getAllUsers()
   {
     const header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));
-    // debugger;
+
     this.userService.getAllUsers().subscribe(
       (data : UserData[]=[]) => {
-        // debugger;
         for(var i = 0; i < data.length; ++i)
           this.users.push(data[i]);
-        // data.foreach(d=>users.push(d))
-        // this.users = data;
-        
-        // console.log('users1 = ' + this.users);
-      }
-      );
-    console.log('users2 = ' + this.users);
-
-
-// this.userService.getAllUsers();
-    // this.http
-    // .get(this.rootUrl + '/api/GetAllUsers', {headers: header})
-    // .toPromise()
-    // .then((x: UserData) => {
-
-    //   debugger;
-    //   // this.users = x; 
-    //   this.userEmails = x.Emails;
-      
-    //   this.userNames = x.UserNames;
-    //   console.log('users1 = ' + this.userNames)
-    // })
-    // .catch((x: Response) => {
-    //   console.log(x.status);
-    // })
-    // .then(() => {
-    //   console.log('users2 = ' + this.userNames)
-    //   });
-    // console.log('users3 = ' + this.userNames)
+        });
   }
 
 }

@@ -12,6 +12,8 @@ import { UserData } from '../admin-panel/UserData.model';
 @Injectable()
 export class UserService {
   readonly rootUrl = 'http://localhost:50796';
+  header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));
+
   constructor(private http: HttpClient,private router: Router) 
   { 
 
@@ -34,12 +36,26 @@ export class UserService {
     return this.http.post(this.rootUrl + '/Token', data, {headers: reqHeader});
   }
 
+  deleteFromRole(userName: string, roleName: string)
+  {
+    debugger;
+    let endpoint = this.rootUrl + '/api/Users/' + userName + '/' + roleName;
+    return this.http.delete(endpoint, {headers: this.header});
+  }
+
+  addToRole(userName: string, roleName: string)
+  {
+    debugger;
+    let endpoint = this.rootUrl + '/api/Users/' + userName + '/' + roleName;
+    return this.http.put(endpoint, {}, {headers: this.header});
+  }
+
   getAllUsers(){
   
     // let data: Array<User>;
     const header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));
     // var reqHeader = new HttpHeaders({ 'No-Auth': 'True' });
-  return this.http.get(this.rootUrl + '/api/GetAllUsers', { headers: header });
+    return this.http.get(this.rootUrl + '/api/Users', { headers: header });
     // this.http
     // .get(this.rootUrl + '/api/GetAllUsers', {headers: header})
     // .toPromise()

@@ -101,9 +101,7 @@ export class GalleryComponent implements OnInit {
     var file = new File([this.croppedImage], 'imageFileName.png');
     this.imageService.setAvatar(file).subscribe(
       data =>{
-        console.log('done');
-        // Caption.value = null;
-        // Image.Value = null;
+        window.location.reload();
       }
     )
   }
@@ -129,7 +127,7 @@ export class GalleryComponent implements OnInit {
     .get(this.rootUrl + '/api/GetProfileData/' + this.userFromRoute, {headers: header})
     .toPromise()
     .then((x: ClientProfile) => {
-      debugger;
+      // debugger;
       this.imageEntities = x.Photos;
       this.description = x.Description;
       this.avatar = x.Avatar;

@@ -58,7 +58,7 @@ export class ImageService {
     debugger;
     const header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));
     const endPoint = 'http://localhost:50796/api/RemovePhoto/' + Id.toString();
-    return this.http.get(endPoint, {headers: header});
+    return this.http.get(endPoint, {headers: header}); // MUST BE DELETE 
   }
 
   likePhoto(photoId: number)
