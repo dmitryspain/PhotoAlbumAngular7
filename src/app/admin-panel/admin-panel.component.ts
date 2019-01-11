@@ -33,15 +33,12 @@ export class AdminPanelComponent implements OnInit {
 
   manageRoles(userName: string)
   {
-    // debugger;
     var allRoles: string[];
     var possibleRoles: any;
     var userRoles: string[] ;
 
     userRoles = this.users.find(x=>x.UserName == userName).Roles;
-    // data.foreach(d=>users.push(d))
     this.roleService.getAllRoles().toPromise().then((data: string[])=>{
-      //  debugger;
       allRoles = data;
       userRoles = this.users.find(x=>x.UserName == userName).Roles;
 
@@ -71,6 +68,15 @@ export class AdminPanelComponent implements OnInit {
   {
 
     this.userService.addToRole(userName, roleName).subscribe((data)=>{
+      console.log(data);
+      window.location.reload();
+    })
+  }
+  
+  removeUser(userName: string)
+  {
+    this.userService.removeUser(userName).subscribe((data)=>{
+      debugger;
       console.log(data);
       window.location.reload();
     })

@@ -50,6 +50,14 @@ export class UserService {
     return this.http.put(endpoint, {}, {headers: this.header});
   }
 
+  removeUser(userName: string)
+  {
+    debugger;
+    let endpoint = this.rootUrl + '/api/Users/' + userName;
+    return this.http.delete(endpoint, {headers: this.header});
+  }
+
+
   getAllUsers(){
   
     // let data: Array<User>;
