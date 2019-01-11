@@ -41,7 +41,6 @@ export class GalleryComponent implements OnInit {
   }
   imageCropped(event: ImageCroppedEvent) {
       this.croppedImage = event.file;
-      console.log('croped!');
   }
 
 
@@ -61,20 +60,9 @@ export class GalleryComponent implements OnInit {
     this.getPhotos();
   }
 
-  // canDelete(Id: number): boolean
-  // {
-  //   //debugger;
-
-  //   var user = localStorage.getItem('userName');
-  //   debugger;
-  //   return this.imageService.isUserHavePhoto(user, Id); 
-  //   //this.imageEntities.find(x=>x.Id == Id) != null;
-  // }
-
   handleFileInput(file: FileList)
   {
     this.fileToUpload = file.item(0);
-    // show image preview
     var reader = new FileReader();
     reader.onload = (event:any)=>{
       this.imageUrl = event.target.result;
@@ -97,7 +85,6 @@ export class GalleryComponent implements OnInit {
   SetAvatar(Image)
   {
     debugger;
-    //var blob = new Blob([Image], {type: 'image/png'});
     var file = new File([this.croppedImage], 'imageFileName.png');
     this.imageService.setAvatar(file).subscribe(
       data =>{
@@ -124,15 +111,13 @@ export class GalleryComponent implements OnInit {
    });
 
    this.http
-    .get(this.rootUrl + '/api/GetProfileData/' + this.userFromRoute, {headers: header})
+    .get(this.rootUrl + '/api/ClientProfiles/' + this.userFromRoute, {headers: header})
     .toPromise()
     .then((x: ClientProfile) => {
-      // debugger;
       this.imageEntities = x.Photos;
       this.description = x.Description;
       this.avatar = x.Avatar;
       this.noavatar = this.avatar == null;
-      console.log('users = ' + this.users)
     })
       
   }

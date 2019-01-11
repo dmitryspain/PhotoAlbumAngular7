@@ -31,7 +31,7 @@ export class AdminPanelComponent implements OnInit {
     this.getAllUsers();
   }
 
-  method(userName: string)
+  manageRoles(userName: string)
   {
     // debugger;
     var allRoles: string[];
@@ -63,6 +63,7 @@ export class AdminPanelComponent implements OnInit {
     debugger;
     this.userService.deleteFromRole(userName, roleName).subscribe((data)=>{
       console.log(data);
+      window.location.reload();
     });
   }
 

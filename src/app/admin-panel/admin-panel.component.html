@@ -1,6 +1,13 @@
 <app-navbar></app-navbar>
 
 <table class="table table-hover">
+    <tr>
+        <th><h3><b>Login</b></h3></th>
+        <th><h3><b>Email</b></h3></th>
+        <th><h3><b>Roles</b></h3></th>
+        <th><h3><b>Add/Remove role</b></h3></th>
+        <th><h3><b>Remove user</b></h3></th>
+      </tr>
     <tr *ngFor="let user of users">
     <td>
         <h3>{{user.UserName}}</h3>
@@ -10,16 +17,16 @@
     </td>
     <td >
         <h3 *ngFor="let role of user.Roles">{{role.Name}}
-            <button (click)="method(user.UserName)" data-toggle="modal" data-target="#exampleModal" class="btn btn-sm btn-outline-info"><h2>+</h2></button>
-            <!-- <button (click)="onDelete(user.UserName, role.Name)" class="btn btn-sm btn-outline-danger"><h2>x</h2></button> -->
         </h3>
     </td>
 
-    <td><button  data-toggle="modal" data-target="#exampleModal" (click)="method(user.UserName)"  class="btn btn-sm btn-outline-danger"><h3>x</h3></button></td>
+    <td>
+        <button (click)="manageRoles(user.UserName)" data-toggle="modal" data-target="#exampleModal" class="btn btn-sm btn-outline-info"><h2>+</h2></button>
+    </td>
+
+    <td><button (click)="removeUser(user.UserName)"  class="btn btn-sm btn-outline-danger"><h3>x</h3></button></td>
     </tr>
 </table>
-
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for @getbootstrap</button> -->
 
 <div class="modal modal-dialog" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <!-- <div class="modal-dialog" role="document"> -->

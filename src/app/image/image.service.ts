@@ -19,7 +19,7 @@ export class ImageService {
   {
     const header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));
 
-    let endPoint = this.rootUrl + '/api/IsUserHavePhoto/' + userName + '/' + photoId;
+    let endPoint = this.rootUrl + '/api/ClientProfiles/IsPhotoBelongToUser/' + userName + '/' + photoId;
     var data = this.http
     .get(endPoint, {headers: header})
     .toPromise()
@@ -32,7 +32,7 @@ export class ImageService {
 
   postFile(description: string, fileToUpload: File)
   {
-    const endPoint = 'http://localhost:50796/api/UploadPhoto';
+    const endPoint = 'http://localhost:50796/api/ClientProfiles/UploadPhoto';
     const formData: FormData = new FormData();
     let name = localStorage.getItem('userName');
     formData.append('Image', fileToUpload, fileToUpload.name);
@@ -46,7 +46,7 @@ export class ImageService {
   {
     debugger;
     let name = localStorage.getItem('userName');
-    const endPoint = 'http://localhost:50796/api/SetAvatar/' + name;
+    const endPoint = 'http://localhost:50796/api/ClientProfiles/SetAvatar/' + name;
     const formData: FormData = new FormData();
     formData.append('Image', fileToUpload, fileToUpload.name);
 
@@ -57,7 +57,7 @@ export class ImageService {
   {
     debugger;
     const header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));
-    const endPoint = 'http://localhost:50796/api/RemovePhoto/' + Id.toString();
+    const endPoint = 'http://localhost:50796/api/ClientProfiles/RemovePhoto/' + Id.toString();
     return this.http.get(endPoint, {headers: header}); // MUST BE DELETE 
   }
 
@@ -66,7 +66,7 @@ export class ImageService {
     // debugger;
     // const header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));
     let userName = localStorage.getItem('userName');
-    const endPoint = 'http://localhost:50796/api/LikePhoto/' + photoId + '/' + userName;
+    const endPoint = 'http://localhost:50796/api/ClientProfiles/LikePhoto/' + photoId + '/' + userName;
     return this.http.post(endPoint, {headers: this.header});
   }
 }

@@ -41,7 +41,7 @@ export class ImageDetailComponent implements OnInit {
     const header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));
     let userName = localStorage.getItem('userName');
     return this.http
-    .delete(this.rootUrl + '/api/RemovePhoto/' + Id, {headers: header})
+    .delete(this.rootUrl + '/api/ClientProfiles/RemovePhoto/' + Id, {headers: header})
     .toPromise()
     .then((statusCode: number) => {
       if(statusCode == 200)
@@ -68,7 +68,7 @@ export class ImageDetailComponent implements OnInit {
   //  });
 
    this.http
-    .get(this.rootUrl + '/api/GetPhoto/' + Id, {headers: header})
+    .get(this.rootUrl + '/api/ClientProfiles/GetPhoto/' + Id, {headers: header})
     .toPromise()
     .then((x: Image) => {
 
@@ -79,6 +79,7 @@ export class ImageDetailComponent implements OnInit {
         this.likesCount = this.image.Likes.length;
         var user = localStorage.getItem('userName');
         this.imageService.isUserHavePhoto(user, this.image.Id).then(data=>{
+          debugger;
           this.canBeDeleted = data;
         }) 
       })
