@@ -4,7 +4,7 @@ import { UserService } from '../shared/user.service';
 import { ImageService } from '../image/image.service';
 import { HttpHeaders } from '@angular/common/http';
 import { UserData } from '../admin-panel/UserData.model';
-
+declare var $ : any;
 
 @Component({
   selector: 'app-home',
@@ -15,34 +15,22 @@ import { UserData } from '../admin-panel/UserData.model';
 
 export class HomeComponent implements OnInit {
   readonly rootUrl = 'http://localhost:50796';
-  users: UserData[]=[];
-
-  
-
 
   constructor(private router: Router, 
     private imageService: ImageService, private userService: UserService) {
   }
     
-  showSuccess() {
-   console.log('users = '+ this.users);
-  }
-
   ngOnInit() {
-    // this.getAllUsers();
+    $('.carousel').carousel();
+$('#myCarousel').on('slide',function(){
+  $('.blocky').fadeOut(300);
+})
+$('#myCarousel').on('slid',function(){
+  $('.blocky').fadeIn(600).animate({marginLeft:"+=12%"},200).animate({marginLeft:"-=15%"},300).animate({marginLeft:"+=4%"},600);
+})
   }
 
-  // getAllUsers()
-  // {
-  //   const header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));
-  //   // debugger;
-  //   this.userService.getAllUsers().subscribe(
-  //     (data : UserData[]=[]) => {
-  //       for(var i = 0; i < data.length; ++i)
-  //         this.users.push(data[i]);
-  //     })
-    
-  // }
+ 
     
     
 

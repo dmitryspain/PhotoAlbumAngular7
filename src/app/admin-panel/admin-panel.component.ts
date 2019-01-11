@@ -8,7 +8,6 @@ import { Http, Response } from "@angular/http";
 import { ViewChild, ElementRef, AfterViewInit} from '@angular/core';
 import { RoleService } from '../shared/role.service';
 import { Role } from '../shared/role.model';
-declare var $:any;
 
 @Component({
   selector: 'app-admin-panel',
@@ -67,17 +66,14 @@ export class AdminPanelComponent implements OnInit {
   addToRole(userName: string, roleName: string)
   {
 
-    this.userService.addToRole(userName, roleName).subscribe((data)=>{
-      console.log(data);
+    this.userService.addToRole(userName, roleName).subscribe(()=>{
       window.location.reload();
     })
   }
   
   removeUser(userName: string)
   {
-    this.userService.removeUser(userName).subscribe((data)=>{
-      debugger;
-      console.log(data);
+    this.userService.removeUser(userName).subscribe(()=>{
       window.location.reload();
     })
   }

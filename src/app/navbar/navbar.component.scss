@@ -1,3 +1,8 @@
 .bg-blue{
-    background-color: #33b5e5!important;
+    background-color: #4158D0;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+}
+.navbar.navbar-light .breadcrumb .nav-item .nav-link, .navbar.navbar-light .navbar-nav .nav-item .nav-link {
+    color: rgb(252, 252, 252);
+    transition: 0.35s;
 }
