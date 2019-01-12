@@ -32,7 +32,18 @@
         </div>
         <div class="card-body">
           <form #imageForm=ngForm (ngSubmit)="SetAvatar(Image)">
-            <input type="file" class="inputfile" #Avatar accept="image/*" data-toggle="modal" data-target="#myModal" (change)="fileChangeEvent($event)">
+
+
+              <label for="file-upload" class="custom-file-upload">
+                  <i class="material-icons left">add_circle</i> <h5>Change avatar</h5> 
+              </label>
+              <!-- <input id="file-upload" type="file"/> -->
+            <input type="file" id="file-upload" class="inputfile" #Avatar accept="image/*" data-toggle="modal" data-target="#myModal" (change)="fileChangeEvent($event)">
+
+
+
+
+            <!-- <input type="file" class="inputfile" #Avatar accept="image/*" data-toggle="modal" data-target="#myModal" (change)="fileChangeEvent($event)"> -->
             <div [hidden]="Avatar.value==''" id="myModal" class="modal fade" role="dialog">
               <div  class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -61,26 +72,67 @@
             
           </form>
           <div class="row">
-            <a class="waves-effect waves-light btn-large offset-s6"><i class="material-icons right">cloud</i>Add photos</a>
+            <a class="btn success" data-toggle="modal" data-target="#exampleModal"><i class="large material-icons left">add_a_photo</i>Add photo</a>
           </div>
+
           <h4 class="card-title center">{{this.userFromRoute}}</h4>
           <p class="card-text center">{{this.description}}</p>
         </div>
       </div>
       
-    
+      <div class="container">
 
-    <main class="grid">
-      <div *ngFor="let image of imageEntities; let i = index" >
-
-        <a [routerLink] ="['/gallery/image', image.Id]">
-          <img id="i" src="{{'data:image/jpeg;base64,' + image.Data}}" alt="Sample photo">
-        </a>
+        <a class="btn success btn-center-grid" data-toggle="modal" data-target="#exampleModal"><i class="large material-icons left">add_a_photo</i>Add photo</a>
+        
+        <main class="grid">
+          <div *ngFor="let image of imageEntities; let i = index" >
+            
+            <a [routerLink] ="['/gallery/image', image.Id]">
+              <img id="i" src="{{'data:image/jpeg;base64,' + image.Data}}" alt="Sample photo">
+            </a>
+          </div>
+          
+        </main> 
       </div>
-    </main> 
+    
     
   </div>
-
+ <!-- START -->
+ <div class="modal modal-dialog" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title" id="exampleModalLabel">Please, enter description to your photo</h1>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <div class="row">
+                  <!-- <div class="col s8 offset-2"> -->
+                      <form #imageForm=ngForm (ngSubmit)="OnSubmit(Caption,Image)">
+                        <div class="row">
+                          <!-- <div class="input-field col s12"> -->
+                            <input type="text" #Caption ngModel name="Caption" id="Caption" required>
+                            <label for="Caption">Caption</label>
+                         <!-- </div> -->
+                      </div>
+                      <label for="photo-upload" class="custom-file-upload">
+                          <i class="fa fa-cloud-upload"></i> Custom Upload
+                      </label>
+                      <input id="photo-upload" type="file" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
+                  <button type="submit" class="btn success btn-submit" [disabled]="Image.value=='' || !imageForm.valid">Submit</button>
+                </form>
+              <!-- </div> -->
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="submit" class="btn success btn-submit" [disabled]="Image.value=='' || !imageForm.valid">Ok</button> -->
+        </div>
+      </div>
+  </div>
+     <!-- END -->
 
       <!-- <div class="row"> 
         <div *ngFor="let image of imageEntities"  class="row">
@@ -120,17 +172,7 @@
         <div class="row">
           <div class="col s8 offset-2">
             <!-- <form #imageForm=ngForm (ngSubmit)="SetAvatar(Image)"> -->
-              <form #imageForm=ngForm (ngSubmit)="OnSubmit(Caption,Image)">
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input type="text" #Caption ngModel name="Caption" id="Caption" required>
-                    <label for="Caption">Caption</label>
-            </div>
-          </div>
-          <img [src]="imageUrl"  style="width:250px;height:200px">
-          <input type="file" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
-          <button type="submit" class="btn-large btn-submit" [disabled]="Image.value=='' || !imageForm.valid">Submit</button>
-        </form>
+              
       </div>
     </div>
   </div>

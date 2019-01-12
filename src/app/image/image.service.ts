@@ -67,7 +67,7 @@ export class ImageService {
     // const header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));
     let userName = localStorage.getItem('userName');
     const endPoint = 'http://localhost:50796/api/ClientProfiles/LikePhoto/' + photoId + '/' + userName;
-    return this.http.post(endPoint, {headers: this.header});
+    return this.http.put(endPoint, {}, {headers: this.header});
   }
 }
 

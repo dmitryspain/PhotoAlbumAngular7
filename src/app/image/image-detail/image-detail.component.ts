@@ -4,6 +4,7 @@ import { ImageService } from '../image.service';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Image } from 'src/app/shared/image.model';
 import { GalleryComponent } from 'src/app/gallery/gallery.component';
+import { Like } from 'src/app/shared/like.model';
 
 @Component({
   selector: 'app-image-detail',
@@ -14,9 +15,11 @@ export class ImageDetailComponent implements OnInit {
   readonly rootUrl = 'http://localhost:50796';
   image: Image;
   canBeDeleted=false;
-  likes: string[];
+  likes: Like[];
   userFromRoute: string;
   likesCount:number;
+  isLiked = false;
+
   constructor(private imageService: ImageService, private route: ActivatedRoute,
     private http: HttpClient, private router: Router) { }
 
@@ -52,22 +55,17 @@ export class ImageDetailComponent implements OnInit {
   }
 
   likePhoto(){
-    this.imageService.likePhoto(this.image.Id).subscribe((data : Image)=>{
-      this.likesCount = data.Likes.length;
+    this.imageService.likePhoto(this.image.Id).subscribe(()=>{
+      // debugger;
+      this.likesCount = this.isLiked ? this.likesCount - 1 : this.likesCount + 1;
+      this.isLiked = !this.isLiked;
     });
     
   }
 
   getImage(Id: number) {
     const header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));
-    
-  //   let idFromRoute;
-    
-  //   this.route.params.subscribe(params => {
-  //     idFromRoute = +params['id']; // (+) converts string 'id' to a number
-  //  });
-
-   this.http
+    this.http
     .get(this.rootUrl + '/api/ClientProfiles/GetPhoto/' + Id, {headers: header})
     .toPromise()
     .then((x: Image) => {
@@ -76,10 +74,15 @@ export class ImageDetailComponent implements OnInit {
         this.router.navigate(['/forbidden']);
       else
         this.image = x;
-        this.likesCount = this.image.Likes.length;
-        var user = localStorage.getItem('userName');
-        this.imageService.isUserHavePhoto(user, this.image.Id).then(data=>{
-          debugger;
+
+        // debugger;
+        var userName = localStorage.getItem('userName');
+        this.likes = this.image.Likes;
+        this.likesCount = this.likes.length;
+        this.isLiked = this.likes.some(x => x.UserName == userName);
+
+        this.imageService.isUserHavePhoto(userName, this.image.Id).then(data=>{
+          // debugger;
           this.canBeDeleted = data;
         }) 
       })

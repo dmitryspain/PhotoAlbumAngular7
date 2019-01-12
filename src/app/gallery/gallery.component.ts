@@ -35,12 +35,14 @@ export class GalleryComponent implements OnInit {
   croppedImage: Blob;
   isPhotoRemovedRecently = false;
   canBeDeleted=false;
+  base64avatar: string;
 
   fileChangeEvent(event: any): void {
       this.imageChangedEvent = event;
   }
   imageCropped(event: ImageCroppedEvent) {
       this.croppedImage = event.file;
+      this.base64avatar = event.base64;
   }
 
 
@@ -75,9 +77,7 @@ export class GalleryComponent implements OnInit {
   {
     this.imageService.postFile(Caption.value, this.fileToUpload).subscribe(
       data =>{
-        console.log('done');
-        Caption.value = null;
-        Image.Value = null;
+        window.location.reload();
       }
     )
   }
@@ -88,20 +88,11 @@ export class GalleryComponent implements OnInit {
     var file = new File([this.croppedImage], 'imageFileName.png');
     this.imageService.setAvatar(file).subscribe(
       data =>{
-        window.location.reload();
+        // debugger;
+        this.avatar = this.base64avatar.split(',')[1];
       }
     )
   }
-
-  
-  // getPhoto() {
-  //   const header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));
-  //   this.http.get(this.rootUrl + '/api/GetPhoto', {headers: header}).subscribe(response => {
-  //     debugger;
-  //     this.image = response;
-  //     this.imageSrc = 'data:image/jpeg;base64,' + this.image;
-  //   });
-  // }
 
   getPhotos() {
     const header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));

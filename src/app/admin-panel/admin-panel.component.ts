@@ -23,6 +23,8 @@ export class AdminPanelComponent implements OnInit {
   possibleRoles: string[];
   userRoles: string[];
   currentUser: string;
+  allRoles: string[];
+  userName=localStorage.getItem('userName');
   constructor(private userService: UserService,
     private http: HttpClient, private roleService: RoleService) { }
 
@@ -47,6 +49,7 @@ export class AdminPanelComponent implements OnInit {
           });
       });
 
+      this.allRoles = allRoles;
       this.possibleRoles = possibleRoles;
       this.userRoles = userRoles;
       this.currentUser = userName;
@@ -56,19 +59,22 @@ export class AdminPanelComponent implements OnInit {
   
   removeFromRole(userName: string, roleName: string)
   {
-    debugger;
-    this.userService.deleteFromRole(userName, roleName).subscribe((data)=>{
+    // debugger;
+    
+    this.userService.deleteFromRole(userName, roleName).toPromise().then((data)=>{
       console.log(data);
+      // debugger;
       window.location.reload();
     });
+
+
   }
 
   addToRole(userName: string, roleName: string)
   {
-
-    this.userService.addToRole(userName, roleName).subscribe(()=>{
+    this.userService.addToRole(userName, roleName).toPromise().then(()=>{
       window.location.reload();
-    })
+    });
   }
   
   removeUser(userName: string)
@@ -90,6 +96,7 @@ export class AdminPanelComponent implements OnInit {
 
     this.userService.getAllUsers().subscribe(
       (data : UserData[]=[]) => {
+        // debugger;
         for(var i = 0; i < data.length; ++i)
           this.users.push(data[i]);
         });

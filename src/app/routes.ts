@@ -12,8 +12,8 @@ import { ImageDetailComponent } from './image/image-detail/image-detail.componen
 export const appRoutes : Routes = [
     { path: 'home', component: HomeComponent, canActivate:[AuthGuard] },
     { path: 'forbidden', component: ForbiddenComponent, canActivate: [AuthGuard]},
-    { path: 'gallery/:id', component: GalleryComponent, canActivate:[AuthGuard]},
-    { path: 'gallery/image/:id', component: ImageDetailComponent},
+    { path: 'gallery/:id', component: GalleryComponent, canActivate:[AuthGuard], data: { roles: ['Users', 'Administrators'] }},
+    { path: 'gallery/image/:id', component: ImageDetailComponent, canActivate:[AuthGuard], data: { roles: ['Users', 'Administrators'] }},
     { path: 'adminPanel', component: AdminPanelComponent, canActivate: [AuthGuard] , data: { roles: ['Administrators'] }},
     { 
         path: 'signup', component: UserComponent,
@@ -24,7 +24,7 @@ export const appRoutes : Routes = [
         children : [{ path: '', component: SignInComponent }]
     },
     { 
-        path : '', redirectTo: '/login', 
+        path : '', redirectTo: '/home', 
         pathMatch: 'full'
     }
 ];

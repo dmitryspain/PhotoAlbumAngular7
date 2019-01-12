@@ -21,10 +21,10 @@
     </td>
 
     <td>
-        <button (click)="manageRoles(user.UserName)" data-toggle="modal" data-target="#exampleModal" class="btn btn-sm btn-outline-info"><h2>+</h2></button>
+        <button *ngIf="user.UserName!=userName" (click)="manageRoles(user.UserName)" data-toggle="modal" data-target="#exampleModal" class="btn btn-sm btn-outline-info"><h2>+</h2></button>
     </td>
 
-    <td><button (click)="removeUser(user.UserName)"  class="btn btn-sm btn-outline-danger"><h3>x</h3></button></td>
+    <td><button *ngIf="user.UserName!=userName" (click)="removeUser(user.UserName)"  class="btn btn-sm btn-outline-danger"><h3>x</h3></button></td>
     </tr>
 </table>
 

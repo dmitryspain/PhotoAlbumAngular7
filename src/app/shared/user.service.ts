@@ -38,14 +38,14 @@ export class UserService {
 
   deleteFromRole(userName: string, roleName: string)
   {
-    debugger;
+    // debugger;
     let endpoint = this.rootUrl + '/api/Users/' + userName + '/' + roleName;
     return this.http.delete(endpoint, {headers: this.header});
   }
 
   addToRole(userName: string, roleName: string)
   {
-    debugger;
+    // debugger;
     let endpoint = this.rootUrl + '/api/Users/' + userName + '/' + roleName;
     return this.http.put(endpoint, {}, {headers: this.header});
   }
@@ -117,8 +117,9 @@ export class UserService {
 
   getAllRoles()
   {
+    debugger;
     var reqHeader = new HttpHeaders({'No-Auth': 'True'});
-    return this.http.get(this.rootUrl + '/api/GetAllRoles', {headers: reqHeader});
+    return this.http.get(this.rootUrl + '/api/Roles', {headers: reqHeader});
   }
 
   roleMatch(allowedRoles): boolean {
