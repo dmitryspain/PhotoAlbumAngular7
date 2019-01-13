@@ -28,7 +28,7 @@
             <li class="nav-item">
                 <a class="nav-link" routerLink="/gallery/{{userName}}"><h3><b>Gallery</b></h3></a>
             </li>
-            <li class="nav-item">
+            <li *ngIf="userService.roleMatch(['Administrators'])" class="nav-item">
                 <a class="nav-link" routerLink="/adminPanel"><h3><b>Admin panel</b></h3></a>
             </li>
             <li class="nav-item">

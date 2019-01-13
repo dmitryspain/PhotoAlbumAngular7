@@ -23,8 +23,8 @@
     <td>
         <button *ngIf="user.UserName!=userName" (click)="manageRoles(user.UserName)" data-toggle="modal" data-target="#exampleModal" class="btn btn-sm btn-outline-info"><h2>+</h2></button>
     </td>
-
-    <td><button *ngIf="user.UserName!=userName" (click)="removeUser(user.UserName)"  class="btn btn-sm btn-outline-danger"><h3>x</h3></button></td>
+    
+    <td><button *ngIf="user.UserName!=userName" (click)="deleteConfirm(user.UserName)"  class="btn btn-sm btn-outline-danger"><h3>x</h3></button></td>
     </tr>
 </table>
 
@@ -65,20 +65,3 @@
         <!-- </div> -->
       </div>
 
-
-<!-- <div id="myModal" class="modal fade modal-lg" role="dialog">
-<div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Add to role</h4>
-          </div>
-          <div class="modal-body">
-
-            </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
-          </div>
-        </div>
-      </div>
-      </div> -->

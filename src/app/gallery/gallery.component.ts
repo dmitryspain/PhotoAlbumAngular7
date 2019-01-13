@@ -11,7 +11,7 @@ import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { UserService } from '../shared/user.service';
 import { UserData } from '../admin-panel/UserData.model';
 import { map } from "rxjs/operators";
-
+declare var $: any;
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
@@ -36,6 +36,8 @@ export class GalleryComponent implements OnInit {
   isPhotoRemovedRecently = false;
   canBeDeleted=false;
   base64avatar: string;
+  isPhotoAdded = false;
+
 
   fileChangeEvent(event: any): void {
       this.imageChangedEvent = event;
@@ -75,16 +77,20 @@ export class GalleryComponent implements OnInit {
 
   OnSubmit(Caption,Image)
   {
-    this.imageService.postFile(Caption.value, this.fileToUpload).subscribe(
-      data =>{
-        window.location.reload();
-      }
-    )
+    if(!this.isPhotoAdded)
+    {
+      this.isPhotoAdded = true;
+      this.imageService.postFile(Caption.value, this.fileToUpload).subscribe(
+        data =>{
+          window.location.reload();
+        }
+      )
+    }
   }
 
   SetAvatar(Image)
   {
-    debugger;
+    // debugger;
     var file = new File([this.croppedImage], 'imageFileName.png');
     this.imageService.setAvatar(file).subscribe(
       data =>{
@@ -92,6 +98,14 @@ export class GalleryComponent implements OnInit {
         this.avatar = this.base64avatar.split(',')[1];
       }
     )
+  }
+
+  changeDescription(){
+
+    var description = $("#descriptionInput").val();
+    this.userService.changeDescription(description).subscribe((data)=>{
+     this.description = description;
+    })
   }
 
   getPhotos() {

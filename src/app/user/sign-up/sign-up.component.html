@@ -1,6 +1,4 @@
-<form [formGroup]="angForm" (ngSubmit)="OnSubmit(angForm)">
-  <!-- <div class="row"> -->
-
+<form [formGroup]="angForm" >
     <div class="form-group col s6">
       <label><h3>Login: </h3>
         <input  class="form-control" formControlName="name" type="text" name="Login" required minlength="6" >
@@ -40,7 +38,7 @@
       </div>
 
       <div class="container">
-        <button [disabled]="angForm.controls['password'].invalid || angForm.controls['email'].invalid || angForm.controls['name'].invalid" class="btn-large btn-submit blue lighten-1" type="submit">Submit</button>
+        <button [disabled]="angForm.controls['password'].invalid || angForm.controls['email'].invalid || angForm.controls['name'].invalid" class="btn-large btn-submit blue lighten-1" type="button" (click)="OnSubmit(angForm)">Submit</button>
       </div>
 
   <!-- </div> -->

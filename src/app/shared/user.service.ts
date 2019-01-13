@@ -52,10 +52,19 @@ export class UserService {
 
   removeUser(userName: string)
   {
-    debugger;
     let endpoint = this.rootUrl + '/api/Users/' + userName;
     return this.http.delete(endpoint, {headers: this.header});
   }
+
+  changeDescription(description: string)
+  {
+    let userName = localStorage.getItem('userName');
+    let endpoint = this.rootUrl + '/api/ClientProfiles/ChangeDescription/' + userName;
+    const formData: FormData = new FormData();
+    formData.append('Description', description);
+    return this.http.put(endpoint, formData, {headers: this.header});
+  }
+
 
 
   getAllUsers(){

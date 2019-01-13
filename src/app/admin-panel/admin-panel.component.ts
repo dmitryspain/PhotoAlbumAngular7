@@ -59,11 +59,7 @@ export class AdminPanelComponent implements OnInit {
   
   removeFromRole(userName: string, roleName: string)
   {
-    // debugger;
-    
     this.userService.deleteFromRole(userName, roleName).toPromise().then((data)=>{
-      console.log(data);
-      // debugger;
       window.location.reload();
     });
 
@@ -77,18 +73,13 @@ export class AdminPanelComponent implements OnInit {
     });
   }
   
-  removeUser(userName: string)
-  {
-    this.userService.removeUser(userName).subscribe(()=>{
-      window.location.reload();
-    })
+  deleteConfirm(userName: string) {
+    if(confirm("Are you sure to delete " + userName)) {
+      this.userService.removeUser(userName).subscribe(()=>{
+        this.users = this.users.filter(item => item.UserName !== userName);
+      })
+    }
   }
-
-
-
-
-
-
 
   getAllUsers()
   {

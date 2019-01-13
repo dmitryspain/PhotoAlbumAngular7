@@ -44,7 +44,7 @@ export class ImageService {
 
   setAvatar(fileToUpload: File)
   {
-    debugger;
+    // debugger;
     let name = localStorage.getItem('userName');
     const endPoint = 'http://localhost:50796/api/ClientProfiles/SetAvatar/' + name;
     const formData: FormData = new FormData();
