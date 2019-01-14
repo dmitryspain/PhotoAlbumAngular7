@@ -6,3 +6,24 @@
     color: rgb(252, 252, 252);
     transition: 0.35s;
 }
+
+.modal{
+    display: none;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    background-color: #fafafa;
+    padding: 0px;
+    max-width: 71%;
+    max-height: 31%;
+    width: 62%;
+    margin: auto;
+    overflow-y: auto;
+    border-radius: 2px;
+    will-change: top, opacity;
+}
+
+.modal-sign-up
+{
+    max-height: 50%;
+}

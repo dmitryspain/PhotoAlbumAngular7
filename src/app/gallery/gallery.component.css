@@ -124,6 +124,12 @@ li{
     .btn-center-grid{
         margin-left: 140px;
     }
+
+    .modal-open .modal {
+        overflow-x: hidden;
+        overflow-y: hidden;
+        margin-top: -350px;
+    }
       
       /* Green */
       .success {

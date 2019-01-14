@@ -1,3 +1,18 @@
 .b1{
     color:black;
 }
+.modal{
+    display: none;
+    position: absolute;
+    left: -4px;
+    right: -1px;
+    background-color: #fafafa;
+    padding: 0px;
+    max-width: 71%;
+    max-height: 40%;
+    width: 62%;
+    margin: auto;
+    overflow-y: auto;
+    border-radius: 2px;
+    will-change: top, opacity;
+}

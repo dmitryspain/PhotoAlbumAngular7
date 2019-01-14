@@ -22,7 +22,7 @@ export class SignInComponent implements OnInit {
       localStorage.setItem('userName', userName);
       localStorage.setItem('userToken', data.access_token);
       localStorage.setItem('userRoles', data.role);
-      this.router.navigate(['/home']);
+      window.location.reload();
     }, 
     (err: HttpErrorResponse)=>{
         this.isLoginError = true;

@@ -39,20 +39,20 @@ export class UserService {
   deleteFromRole(userName: string, roleName: string)
   {
     // debugger;
-    let endpoint = this.rootUrl + '/api/Users/' + userName + '/' + roleName;
+    let endpoint = this.rootUrl + '/api/Admins/' + userName + '/' + roleName;
     return this.http.delete(endpoint, {headers: this.header});
   }
 
   addToRole(userName: string, roleName: string)
   {
     // debugger;
-    let endpoint = this.rootUrl + '/api/Users/' + userName + '/' + roleName;
+    let endpoint = this.rootUrl + '/api/Admins/' + userName + '/' + roleName;
     return this.http.put(endpoint, {}, {headers: this.header});
   }
 
   removeUser(userName: string)
   {
-    let endpoint = this.rootUrl + '/api/Users/' + userName;
+    let endpoint = this.rootUrl + '/api/Admins/' + userName;
     return this.http.delete(endpoint, {headers: this.header});
   }
 
@@ -90,19 +90,6 @@ export class UserService {
  
   }
 
-  private extractUsers(response: Response): UserData[]{
-    let res = response.json();
-    debugger;
-    let users: UserData[] = [];
-    for (let i = 0; i < res.length; i++) {
-      users.push()
-      let asd = res[i];
-      users.push(new UserData());
-    }
-    return users;
-  }
-
-
 
 
   getAllPhotos() :any
@@ -134,6 +121,7 @@ export class UserService {
   roleMatch(allowedRoles): boolean {
     var isMatch = false;
     var userRoles: string[] = JSON.parse(localStorage.getItem('userRoles'));
+    if(userRoles == null) return false;
     allowedRoles.forEach(element => {
       if (userRoles.indexOf(element) > -1) {
         isMatch = true;
@@ -145,8 +133,8 @@ export class UserService {
 
   Logout()
   {
-    localStorage.removeItem('userToken');
-    this.router.navigate(['/login']);
+    localStorage.clear();
+    this.router.navigate(['/home']);
   }
 
 

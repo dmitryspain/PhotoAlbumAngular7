@@ -33,7 +33,7 @@
         <div class="card-body">
           <form #imageForm=ngForm (ngSubmit)="SetAvatar(Image)">
               <label for="file-upload" class="custom-file-upload card-center">
-                  <i class="material-icons left">add_circle</i> <h5>Change avatar</h5> 
+                  <i class="material-icons left">monochrome_photos</i> <h5>Change avatar</h5> 
               </label>
               <!-- <input id="file-upload" type="file"/> -->
             <input type="file" id="file-upload" class="inputfile" #Avatar accept="image/*" data-toggle="modal" data-target="#myModal" (change)="fileChangeEvent($event)">
@@ -69,29 +69,27 @@
            
             
           </form>
-          <!-- <div class="row"> -->
-            <!-- <a class="btn success" data-toggle="modal" data-target="#exampleModal"><i class="large material-icons left">add_a_photo</i>Add photo</a> -->
-          <!-- </div> -->
+
 
           <div class="card-title"><b>Login:</b> {{this.userFromRoute}}</div>
-          <p class="card-title"><b>Description:</b> {{this.description}} <i data-toggle="modal" data-target="#descriptionModal" class="material-icons pointer">edit</i></p>
-          <div id="descriptionModal" class="modal modal-dialog" role="dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal">&times;</button>
-                          <h4 class="modal-title">Change description</h4>
-                        </div>
-                        <div class="modal-body">
-                          <textarea name="Text1" id="descriptionInput" cols="40" rows="5" value="{{this.description}}"></textarea>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="submit" (click)="changeDescription()" class="btn btn-default" data-dismiss="modal">Ok</button>
-                        </div>
-                      </div>
-                    </div>
-              
-        </div>
-      </div>
+            <p class="card-title"><b>Description:</b> {{this.description}} <i data-toggle="modal" data-target="#descriptionModal" class="material-icons pointer">edit</i></p>
+              <!-- <div id="descriptionModal" class="modal modal-dialog" role="dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Change description</h4>
+                  </div>
+                  <div class="modal-body">
+                    <textarea name="Text1" id="descriptionInput" cols="40" rows="5" value="{{this.description}}"></textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" (click)="changeDescription()" class="btn btn-default" data-dismiss="modal">Ok</button>
+                  </div>
+                </div>
+              </div> -->
+
+            </div>
+          </div>
       
       <div class="container">
 
@@ -111,7 +109,7 @@
     
   </div>
  <!-- START -->
- <div class="modal modal-dialog" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <div class="modal modal-dialog" style="margin-top:-360px" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title" id="exampleModalLabel">Please, enter description to your photo</h1>
@@ -131,7 +129,7 @@
                          <!-- </div> -->
                       </div>
                       <label for="photo-upload" class="custom-file-upload">
-                          <i class="fa fa-cloud-upload"></i> Custom Upload
+                          <i class="fa fa-cloud-upload"></i> Select image
                       </label>
                       <input id="photo-upload" type="file" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
                   <button type="submit" class="btn success btn-submit" [disabled]="Image.value=='' || !imageForm.valid">Submit</button>
@@ -145,49 +143,18 @@
         </div>
       </div>
   </div>
-     <!-- END -->
 
-      <!-- <div class="row"> 
-        <div *ngFor="let image of imageEntities"  class="row">
-            <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 1" href=""><img class="thumbnail img-responsive" src="{{'data:image/jpeg;base64,' + image.Data}}"></a></div>
-        </div>
+  <div id="descriptionModal" class="modal modal-dialog" role="dialog" style="top:-500px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Change description</h4>
       </div>
-      <div class="modal" id="myModal" role="dialog">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button class="close" type="button" data-dismiss="modal">×</button>
-              <h3 class="modal-title"></h3>
-            </div>
-            <div class="modal-body">
-              <div id="modalCarousel" class="carousel">
-                
-                <div class="carousel-inner">
-                  
-                </div>
-                
-                <a class="carousel-control left" href="#modaCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
-                <a class="carousel-control right" href="#modalCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
-                
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-
-        </div>
+      <div class="modal-body">
+        <textarea name="Text1" id="descriptionInput" cols="40" rows="5" value="{{this.description}}"></textarea>
       </div>
-      </div> -->
-      
-      
-      <div class="container">
-        <div class="row">
-          <div class="col s8 offset-2">
-            <!-- <form #imageForm=ngForm (ngSubmit)="SetAvatar(Image)"> -->
-              
+      <div class="modal-footer">
+        <button type="submit" (click)="changeDescription()" class="btn btn-default" data-dismiss="modal">Ok</button>
       </div>
     </div>
   </div>
-
-

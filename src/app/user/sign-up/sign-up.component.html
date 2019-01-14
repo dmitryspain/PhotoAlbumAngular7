@@ -1,3 +1,4 @@
+<div class="jumbotron">
 <form [formGroup]="angForm" >
     <div class="form-group col s6">
       <label><h3>Login: </h3>
@@ -38,15 +39,13 @@
       </div>
 
       <div class="container">
-        <button [disabled]="angForm.controls['password'].invalid || angForm.controls['email'].invalid || angForm.controls['name'].invalid" class="btn-large btn-submit blue lighten-1" type="button" (click)="OnSubmit(angForm)">Submit</button>
+        <button [disabled]="angForm.controls['password'].invalid || angForm.controls['email'].invalid || angForm.controls['name'].invalid" class="btn-large btn-submit blue lighten-1" type="button" (click)="OnSubmit(angForm)">Sign up</button>
       </div>
-
-  <!-- </div> -->
-
-</form> 
-
-<p *ngIf="this.isSucceded">
-  <ngb-alert [dismissible]="false" type="success">
-    <strong>Warning!</strong> Better check yourself, you're not looking too good.
-  </ngb-alert>
-</p>
+    </form> 
+    
+    <p *ngIf="this.isSucceded">
+      <ngb-alert [dismissible]="false" type="success">
+        <strong>Warning!</strong> Better check yourself, you're not looking too good.
+      </ngb-alert>
+    </p>
+  </div>

@@ -6,6 +6,10 @@ import {HttpClientModule} from '@angular/common/http';
 import { Image } from 'src/app/shared/image.model';
 import { GalleryComponent } from 'src/app/gallery/gallery.component';
 import { Like } from 'src/app/shared/like.model';
+import { UserService } from 'src/app/shared/user.service';
+import { DateFormatPipe } from 'src/app/shared/date-format-pipe.pipe';
+import { ClientProfile } from 'src/app/admin-panel/ClientProfile.model';
+
 
 @Component({
   selector: 'app-image-detail',
@@ -20,9 +24,11 @@ export class ImageDetailComponent implements OnInit {
   userFromRoute: string;
   likesCount:number;
   isLiked = false;
+  uploadedDate: any;
 
   constructor(private imageService: ImageService, private route: ActivatedRoute,
-    private http: HttpClient, private router: Router) { }
+    private http: HttpClient, private router: Router, private userService: UserService,
+    private dateFormatPipe: DateFormatPipe) { }
 
 
     
@@ -53,26 +59,30 @@ export class ImageDetailComponent implements OnInit {
     
   }
 
-  getImage(Id: number) {
+  async getImage(Id: number) {
     const header  = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('userToken'));
     this.http
     .get(this.rootUrl + '/api/ClientProfiles/GetPhoto/' + Id, {headers: header})
     .toPromise()
     .then((x: Image) => {
-
+      
       if(x == null)
-        this.router.navigate(['/forbidden']);
+        this.router.navigate(['/notfound']);
       else
         this.image = x;
+        
+        this.uploadedDate = this.dateFormatPipe.transform(this.image.UploadedDate);
 
         var userName = localStorage.getItem('userName');
         this.likes = this.image.Likes;
         this.likesCount = this.likes.length;
         this.isLiked = this.likes.some(x => x.UserName == userName);
-
-        this.imageService.isUserHavePhoto(userName, this.image.Id).then(data=>{
-          this.canBeDeleted = data;
-        }) 
+        
+        this.imageService.getPhotos(this.userFromRoute)
+        .toPromise()
+        .then((x: ClientProfile) => {
+          this.canBeDeleted = x.Photos.find(x=>x.Id == this.image.Id) != null;
+        })
       })
   }
 }

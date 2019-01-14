@@ -31,6 +31,9 @@ import {
   NgBootstrapFormValidationModule,
   CUSTOM_ERROR_MESSAGES
 } from "ng-bootstrap-form-validation";
+import { ContactsComponent } from './contacts/contacts.component';
+import { DateFormatPipe } from './shared/date-format-pipe.pipe';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +47,9 @@ import {
     GalleryComponent,
     ImageDetailComponent,
     NavbarComponent,
+    ContactsComponent,
+    DateFormatPipe,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +68,7 @@ import {
     NgBootstrapFormValidationModule.forRoot(),
     NgBootstrapFormValidationModule,
   ],
-  providers: [UserService, AuthGuard, ImageService],
+  providers: [UserService, AuthGuard, ImageService, DateFormatPipe],
   bootstrap: [AppComponent],
   schemas: [ NO_ERRORS_SCHEMA ]
 })

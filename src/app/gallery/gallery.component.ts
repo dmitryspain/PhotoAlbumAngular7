@@ -50,7 +50,8 @@ export class GalleryComponent implements OnInit {
 
   constructor(private imageService: ImageService, 
     private http: HttpClient, 
-    private route : ActivatedRoute,    
+    private route : ActivatedRoute, 
+    private router: Router,   
     private userService: UserService) {
    }
 
@@ -90,11 +91,9 @@ export class GalleryComponent implements OnInit {
 
   SetAvatar(Image)
   {
-    // debugger;
     var file = new File([this.croppedImage], 'imageFileName.png');
     this.imageService.setAvatar(file).subscribe(
       data =>{
-        // debugger;
         this.avatar = this.base64avatar.split(',')[1];
       }
     )
@@ -115,21 +114,15 @@ export class GalleryComponent implements OnInit {
       this.userFromRoute = params['id']; // (+) converts string 'id' to a number
    });
 
-   this.http
-    .get(this.rootUrl + '/api/ClientProfiles/' + this.userFromRoute, {headers: header})
+    this.imageService.getPhotos(this.userFromRoute)
     .toPromise()
     .then((x: ClientProfile) => {
       this.imageEntities = x.Photos;
       this.description = x.Description;
       this.avatar = x.Avatar;
       this.noavatar = this.avatar == null;
+    }).catch((data)=>{
+      this.router.navigate(['/notfound']);
     })
-      
   }
-
-
-
-
-
-
 }

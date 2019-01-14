@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div class="row">
   <div class=container>
-      <img id="i" src="{{'data:image/jpeg;base64,' + image.Data}}" alt="Sample photo" class="img-container paper">
+      <img src="{{'data:image/jpeg;base64,' + image.Data}}" alt="Sample photo" class="img-container paper">
       <!-- <div class="text-block"> 
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium est delenivero.
             </p>
@@ -12,9 +12,9 @@
         </a>
         <!-- <h3>Likes: {{image.Likes.length}}</h3> -->
         <h3>Description: {{image.Description}} </h3>
-        <h3>Uploaded Date : {{image.UploadedDate}}</h3>
+        <h3>Uploaded Date : {{uploadedDate}}</h3>
         <!-- <button class="btn danger">Danger</button> -->
-        <button *ngIf="canBeDeleted" (click)="this.removePhoto(image.Id)"  class="btn danger">Delete photo</button>
+        <button *ngIf="canBeDeleted||userService.roleMatch(['Administrators'])" (click)="this.removePhoto(image.Id)"  class="btn danger">Delete photo</button>
         <!-- <button *ngIf="canBeDeleted" (click)="this.removePhoto(image.Id)"  class="btn danger"><i class="material-icons left">cloud</i>Delete photo</button> -->
       </div>
 </div>

@@ -25,14 +25,23 @@
                         <i class="material-icons">photo_camera</i> <b routerLink="/home" >Photo gallery</b>
                       </a>
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
+            <li *ngIf="userName!=null" class="nav-item">
                 <a class="nav-link" routerLink="/gallery/{{userName}}"><h3><b>Gallery</b></h3></a>
             </li>
             <li *ngIf="userService.roleMatch(['Administrators'])" class="nav-item">
                 <a class="nav-link" routerLink="/adminPanel"><h3><b>Admin panel</b></h3></a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" routerLink="/contacts"><h3><b>Contacts</b></h3></a>
+            </li>
+            <li *ngIf="userName!=null" class="nav-item">
                 <a class="nav-link" (click)="Logout()"><h3><b>Logout</b></h3></a>
+            </li>
+            <li *ngIf="userName==null" class="nav-item">
+                <a class="nav-link" onclick="document.getElementById('signin').style.display='block'"><h3><b>Sign in</b></h3></a>
+            </li>
+            <li *ngIf="userName==null" class="nav-item">
+                <a class="nav-link" onclick="document.getElementById('signup').style.display='block'"><h3><b>Sign up</b></h3></a>
             </li>
           </ul>
           <form class="form-inline my-2 my-lg-0">
@@ -41,3 +50,18 @@
           </form>
         </div>
       </nav>
+
+
+      <!-- <div class="jumbotron"> -->
+        <div id="signin" class="modal">
+              <span onclick="document.getElementById('signin').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <app-sign-in></app-sign-in>
+            </div>
+        <!-- </div> -->
+
+      <div class="container">
+          <div id="signup" class="modal modal-sign-up">
+            <span onclick="document.getElementById('signup').style.display='none'" class="close" title="Close Modal">&times;</span>
+              <app-sign-up></app-sign-up>
+          </div>
+        </div>

@@ -1,3 +1,4 @@
+<!-- <app-navbar></app-navbar>
 <div class="container">
   <div class="row">
     <div class="col s8 offset-s2">
@@ -20,4 +21,26 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+<button onclick="document.getElementById('signin').style.display='block'" style="width:auto;">Sign in</button>
+      <button onclick="document.getElementById('signup').style.display='block'" style="width:auto;">Sign Up</button>
+      <div class="container">
+        <div id="signin" class="modal">
+          <span onclick="document.getElementById('signin').style.display='none'" class="close" title="Close Modal">&times;</span>
+            <app-sign-in></app-sign-in>
+        </div>
+      </div>
+
+      <div class="container">
+          <div id="signup" class="modal-mine">
+            <span onclick="document.getElementById('signup').style.display='none'" class="close" title="Close Modal"></span>
+              <app-sign-up></app-sign-up>
+          </div>
+        </div>
+
+        <div class="container">
+            <div id="signup" class="modal">
+              <span onclick="document.getElementById('signup').style.display='none'" class="close" title="Close Modal"></span>
+                <app-sign-up></app-sign-up>
+            </div>
+          </div>
